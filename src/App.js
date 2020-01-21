@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { PageHeader } from "antd";
+import MovieProvider from "./providers/MovieProvider";
+import FavoritesProvider from "./providers/FavoritesProvider";
+import MovieList from "./containers/MovieList";
+import "./App.css";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MovieProvider>
+      <FavoritesProvider>
+        <PageHeader
+          className="page-header"
+          title="MovieApp"
+          subTitle="Yalantis ReactJs School"
+        />
+        <div className="content">
+          <MovieList />
+        </div>
+      </FavoritesProvider>
+    </MovieProvider>
   );
 }
-
-export default App;
