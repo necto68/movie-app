@@ -1,5 +1,18 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## API KEY
+You need to obtain API KEY for local development:
+
+### How to do this
+- Go to [API docs](https://developers.themoviedb.org/3)
+- Check `Introduction` for insctructions
+- Add your `REACT_APP_MOVIE_API_KEY` to `.env.local` file 
+
+like this
+```
+REACT_APP_MOVIE_API_KEY=1234567890abcdef1234567890abcdef
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
