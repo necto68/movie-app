@@ -1,5 +1,12 @@
 @import "~antd/dist/antd.css";
 
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
 .content {
   display: flex;
   flex-wrap: wrap;

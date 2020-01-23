@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Card, Icon, Avatar } from "antd";
+import { Link } from "react-router-dom";
+import { FavoritesContext } from "../providers/FavoritesProvider";
 
 export default function Movie({
   id,
@@ -7,9 +9,34 @@ export default function Movie({
   overview,
   posterPath,
   backdropPath,
-  isFavorite,
-  handleFavoriteIconClick
+  budget = null
 }) {
+  const { favorites, addToFavorites, deleteFromFavorites } = useContext(
+    FavoritesContext
+  );
+  const isFavorite = favorites.has(id);
+
+  const actions = [
+    <Icon
+      key="star"
+      type="star"
+      onClick={() =>
+        isFavorite ? deleteFromFavorites(id) : addToFavorites(id)
+      }
+      theme={isFavorite ? "filled" : "outlined"}
+    />,
+    <Link key="star" to={`/movie/${id}`}>
+      <Icon type="link" />
+    </Link>,
+    budget && (
+      <Icon
+        onClick={() => alert(`Budget - ${budget.toLocaleString()}$`)}
+        key="dollar"
+        type="dollar"
+      />
+    )
+  ].filter(Boolean);
+
   return (
     <Card
       style={{ width: 400, margin: 20 }}
@@ -19,22 +46,7 @@ export default function Movie({
           src={`https://image.tmdb.org/t/p/w500${posterPath}`}
         />
       }
-      actions={[
-        <Icon
-          type="star"
-          onClick={() => handleFavoriteIconClick(id)}
-          theme={isFavorite ? "filled" : "outlined"}
-          key="star"
-        />,
-
-        <a
-          rel="noopener noreferrer"
-          target="_blank"
-          href={`https://www.themoviedb.org/movie/${id}`}
-        >
-          <Icon type="link" key="link" />
-        </a>
-      ]}
+      actions={actions}
     >
       <Card.Meta
         avatar={
